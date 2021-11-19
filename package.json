@@ -51,7 +51,7 @@
     "node": ">= 14"
   },
   "files": [
-    "hooks.js",
+    "hook.js",
     "index.js",
     "src"
   ],
