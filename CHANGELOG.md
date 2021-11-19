@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.4 (2021-11-19)
+
+
+### Bug Fixes
+
+* hooks → hook file ([38934de](https://github.com/Kikobeats/https-tls/commit/38934de9bf8fa574431c3d3a59c468ccc89b5c3f))
+
 ### 1.0.3 (2021-11-19)
 
 
