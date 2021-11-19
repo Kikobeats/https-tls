@@ -4,7 +4,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/Kikobeats/https-tls.svg?style=flat-square)](https://coveralls.io/github/Kikobeats/https-tls)
 [![NPM Status](https://img.shields.io/npm/dm/https-tls.svg?style=flat-square)](https://www.npmjs.org/package/https-tls)
 
-> Setup HTTPS details related to TLS according to the User Agent provided.(https://github.com/apify/got-scraping).
+> Setup HTTPS details related to TLS according to the User Agent provided. Source code from [got-scraping](https://github.com/apify/got-scraping).
 
 ## Install
 
