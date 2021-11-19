@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = headers => {
+module.exports = (headers = {}) => {
   let userAgent
 
   for (const [header, value] of Object.entries(headers)) {
