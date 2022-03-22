@@ -16,5 +16,6 @@ module.exports = options => {
   }
 
   const userAgent = getHeader('user-agent', options.headers)
+
   options.https = tls(userAgent, https)
 }

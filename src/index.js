@@ -1,6 +1,6 @@
 'use strict'
 
-const { getHeader } = require('./headers')
+const { sortHeaders, getHeader } = require('./headers')
 const getBrowser = require('./browser')
 
 // OpenSSL supports secp256r1. It's just reffered to as prime256v1.
@@ -155,3 +155,5 @@ module.exports = (userAgent, httpsOpts) => {
 }
 
 module.exports.getHeader = getHeader
+module.exports.getBrowser = getBrowser
+module.exports.sortHeaders = sortHeaders
