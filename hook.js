@@ -1,6 +1,6 @@
 'use strict'
 
-const getUserAgent = require('./src/user-agent')
+const { getHeader } = require('./src/headers')
 const tls = require('.')
 
 module.exports = options => {
@@ -15,6 +15,6 @@ module.exports = options => {
     return
   }
 
-  const userAgent = getUserAgent(options.headers)
+  const userAgent = getHeader('user-agent', options.headers)
   options.https = tls(userAgent, https)
 }

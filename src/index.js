@@ -1,6 +1,6 @@
 'use strict'
 
-const getUserAgent = require('./user-agent')
+const { getHeader } = require('./headers')
 const getBrowser = require('./browser')
 
 // OpenSSL supports secp256r1. It's just reffered to as prime256v1.
@@ -154,4 +154,4 @@ module.exports = (userAgent, httpsOpts) => {
   return https
 }
 
-module.exports.getUserAgent = getUserAgent
+module.exports.getHeader = getHeader
