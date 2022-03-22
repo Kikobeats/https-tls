@@ -2,7 +2,7 @@
   "name": "https-tls",
   "description": "Setup HTTPS details related to TLS according to the User Agent provided.",
   "homepage": "https://nicedoc.io/Kikobeats/https-tls",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "src/index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
