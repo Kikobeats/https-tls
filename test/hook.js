@@ -21,3 +21,11 @@ test('decorate with https details', t => {
     'maxVersion'
   ])
 })
+
+test('does nothing if user agent is not presnet', t => {
+  const options = { https: {}, headers: {} }
+
+  decorate(options)
+
+  t.deepEqual(Object.keys(options.https), [])
+})

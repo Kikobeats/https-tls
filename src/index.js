@@ -143,13 +143,15 @@ const maxVersion = {
 
 module.exports = (userAgent, httpsOpts) => {
   const https = Object.assign({}, httpsOpts)
-  const browser = getBrowser(userAgent) || 'firefox'
+  const browser = getBrowser(userAgent)
 
-  https.ciphers = knownCiphers[browser]
-  https.signatureAlgorithms = sigalgs[browser]
-  https.ecdhCurve = ecdhCurve[browser]
-  https.minVersion = minVersion[browser]
-  https.maxVersion = maxVersion[browser]
+  if (browser in knownCiphers) {
+    https.ciphers = knownCiphers[browser]
+    https.signatureAlgorithms = sigalgs[browser]
+    https.ecdhCurve = ecdhCurve[browser]
+    https.minVersion = minVersion[browser]
+    https.maxVersion = maxVersion[browser]
+  }
 
   return https
 }

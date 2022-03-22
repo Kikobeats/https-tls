@@ -20,3 +20,8 @@ test('get https details based on user agent', t => {
     'maxVersion'
   ])
 })
+
+test('does nothing if user agent is not presnet', t => {
+  const https = tls()
+  t.deepEqual(Object.keys(https), [])
+})
