@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.8 (2022-03-22)
+
+
+### Bug Fixes
+
+* does nothing if user-agent is not present ([85c055a](https://github.com/Kikobeats/https-tls/commit/85c055a1ba3af464e14b6e21a71e2884606c74eb))
+
 ### 1.0.7 (2022-03-22)
 
 ### 1.0.6 (2022-03-02)
