@@ -4,7 +4,7 @@ const { getHeader } = require('./src/headers')
 const tls = require('.')
 
 module.exports = options => {
-  const { https } = options
+  const https = options.https ?? {}
 
   if (
     https.ciphers ||
