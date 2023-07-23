@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.13 (2023-07-23)
+
+
+### Bug Fixes
+
+* typo ([ecda92c](https://github.com/Kikobeats/https-tls/commit/ecda92c3edde2a2f17da28a0d25b036f6488d4c6))
+
 ### 1.0.12 (2022-06-11)
 
 ### 1.0.11 (2022-05-17)
