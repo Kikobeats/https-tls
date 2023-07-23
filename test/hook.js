@@ -22,7 +22,7 @@ test('decorate with https details', t => {
   ])
 })
 
-test('does nothing if user agent is not presnet', t => {
+test('does nothing if user agent is not present', t => {
   const options = { https: {}, headers: {} }
 
   decorate(options)

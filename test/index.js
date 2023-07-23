@@ -21,7 +21,7 @@ test('get https details based on user agent', t => {
   ])
 })
 
-test('does nothing if user agent is not presnet', t => {
+test('does nothing if user agent is not present', t => {
   const https = tls()
   t.deepEqual(Object.keys(https), [])
 })
