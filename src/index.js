@@ -3,15 +3,14 @@
 const { sortHeaders, getHeader } = require('./headers')
 const getBrowser = require('./browser')
 
-// OpenSSL supports secp256r1. It's just reffered to as prime256v1.
 const ecdhCurve = {
   firefox: [
     'X25519',
     'prime256v1',
     'secp384r1',
-    'secp521r1'
-    // 'ffdhe2048',
-    // 'ffdhe3072',
+    'secp521r1',
+    'ffdhe2048',
+    'ffdhe3072'
   ].join(':'),
   chrome: ['X25519', 'prime256v1', 'secp384r1'].join(':'),
   safari: ['X25519', 'prime256v1', 'secp384r1', 'secp521r1'].join(':')
