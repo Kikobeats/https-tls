@@ -48,7 +48,7 @@
     "unique-random-array": "2"
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 18"
   },
   "files": [
     "hook.js",
@@ -60,6 +60,7 @@
     "contributors": "(npx git-authors-cli && npx finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard-markdown README.md && standard",
+    "postinstall": "node scripts/postinstall.js",
     "postrelease": "npm run release:tags && npm run release:github && (ci-publish || npm publish --access=public)",
     "prerelease": "npm run update:check && npm run contributors",
     "pretest": "npm run lint",
