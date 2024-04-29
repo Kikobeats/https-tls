@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.21 (2024-04-29)
+
+
+### Bug Fixes
+
+* scripts folder ([83b01f3](https://github.com/Kikobeats/https-tls/commit/83b01f33e9d7d1055fb4b2520d1236ca9d9bc9f7))
+
 ### 1.0.20 (2024-04-29)
 
 ### 1.0.19 (2024-04-26)

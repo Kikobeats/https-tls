@@ -2,7 +2,7 @@
   "name": "https-tls",
   "description": "Setup HTTPS details related to TLS according to the User Agent provided.",
   "homepage": "https://github.com/Kikobeats/https-tls",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "main": "src/index.js",
   "author": {
     "email": "josefrancisco.verdu@gmail.com",
