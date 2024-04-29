@@ -53,6 +53,7 @@
   "files": [
     "hook.js",
     "index.js",
+    "scripts",
     "src"
   ],
   "scripts": {
