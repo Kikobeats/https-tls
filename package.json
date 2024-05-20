@@ -45,7 +45,7 @@
     "standard-markdown": "latest",
     "standard-version": "latest",
     "top-user-agents": "latest",
-    "unique-random-array": "2"
+    "unique-random-array": "4"
   },
   "engines": {
     "node": ">= 18"
