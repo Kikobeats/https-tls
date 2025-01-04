@@ -20,20 +20,27 @@ const getHeader = (key, headers) => {
 const sortHeaders = headers => {
   const userAgent = getHeader('user-agent', headers)
   const browser = getBrowser(userAgent)
-
   const order = HEADERS_ORDER[browser] || []
   const orderedHeaders = {}
 
-  for (const attribute of order) {
-    if (attribute in headers) {
-      orderedHeaders[attribute] = headers[attribute]
-    }
+  // Pre-calculate order as a Set for O(1) lookup
+  const orderSet = new Set(order)
+  const headerKeys = Object.keys(headers)
+  const headersLength = headerKeys.length
+  const orderLength = order.length
+  let i = 0
+  let key
+
+  // Add ordered headers
+  for (; i < orderLength; i++) {
+    key = order[i]
+    if (key in headers) orderedHeaders[key] = headers[key]
   }
 
-  for (const attribute of Object.keys(headers)) {
-    if (!order.includes(attribute)) {
-      orderedHeaders[attribute] = headers[attribute]
-    }
+  // Add remaining headers
+  for (i = 0; i < headersLength; i++) {
+    key = headerKeys[i]
+    if (!orderSet.has(key)) orderedHeaders[key] = headers[key]
   }
 
   return orderedHeaders
