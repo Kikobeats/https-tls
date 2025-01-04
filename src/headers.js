@@ -22,21 +22,21 @@ const sortHeaders = headers => {
   const browser = getBrowser(userAgent)
 
   const order = HEADERS_ORDER[browser] || []
-  const orderedSample = {}
+  const orderedHeaders = {}
 
   for (const attribute of order) {
     if (attribute in headers) {
-      orderedSample[attribute] = headers[attribute]
+      orderedHeaders[attribute] = headers[attribute]
     }
   }
 
   for (const attribute of Object.keys(headers)) {
     if (!order.includes(attribute)) {
-      orderedSample[attribute] = headers[attribute]
+      orderedHeaders[attribute] = headers[attribute]
     }
   }
 
-  return orderedSample
+  return orderedHeaders
 }
 
 module.exports = { getHeader, sortHeaders }
