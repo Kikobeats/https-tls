@@ -27,7 +27,6 @@
     "signature",
     "tls"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
@@ -70,6 +69,12 @@
     "test": "c8 ava"
   },
   "license": "MIT",
+  "ava": {
+    "files": [
+      "test/**/*.js",
+      "!test/helpers.js"
+    ]
+  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
