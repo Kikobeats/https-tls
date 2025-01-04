@@ -1,0 +1,8 @@
+{
+  "name": "@https-tls/benchmark",
+  "private": true,
+  "version": "1.0.0",
+  "devDependencies": {
+    "tinybench": "latest"
+  }
+}
