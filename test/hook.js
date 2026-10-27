@@ -5,6 +5,7 @@ const userAgents = require('top-user-agents')
 const test = require('ava').default
 
 const decorate = require('../hook')
+const { UA } = require('./helpers')
 
 const randomUserAgent = uniqueRandomArray(userAgents)
 
@@ -28,4 +29,15 @@ test('does nothing if user agent is not present', t => {
   decorate(options)
 
   t.deepEqual(Object.keys(options.https), [])
+})
+
+test('reads a mixed-case user-agent that is not the first header', t => {
+  const options = {
+    https: {},
+    headers: { accept: 'text/html', 'User-Agent': UA.CHROME }
+  }
+
+  decorate(options)
+
+  t.is(options.https.minVersion, 'TLSv1')
 })
