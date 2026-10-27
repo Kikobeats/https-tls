@@ -1,8 +1,8 @@
 # https-tls
 
-![Last version](https://img.shields.io/github/tag/Kikobeats/https-tls.svg?style=flat-square)
-[![Coverage Status](https://img.shields.io/coveralls/Kikobeats/https-tls.svg?style=flat-square)](https://coveralls.io/github/Kikobeats/https-tls)
-[![NPM Status](https://img.shields.io/npm/dm/https-tls.svg?style=flat-square)](https://www.npmjs.org/package/https-tls)
+[![Last version](https://img.shields.io/github/v/tag/Kikobeats/https-tls?style=flat-square)](https://github.com/Kikobeats/https-tls/releases)
+[![Coverage Status](https://img.shields.io/coverallsCoverage/github/Kikobeats/https-tls?style=flat-square)](https://coveralls.io/github/Kikobeats/https-tls)
+[![NPM Status](https://img.shields.io/npm/dm/https-tls?style=flat-square)](https://www.npmjs.com/package/https-tls)
 
 > Setup HTTPS details related to TLS according to the User Agent provided. Source code from [got-scraping](https://github.com/apify/got-scraping).
 
