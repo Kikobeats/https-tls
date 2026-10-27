@@ -2,7 +2,7 @@
 
 const uniqueRandomArray = require('unique-random-array')
 const userAgents = require('top-user-agents')
-const test = require('ava')
+const test = require('ava').default
 
 const decorate = require('../hook')
 
