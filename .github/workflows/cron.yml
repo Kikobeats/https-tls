@@ -1,0 +1,37 @@
+name: cron
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Cron job every Monday at 12:00
+    # https://crontab.guru/every-monday
+    - cron: '0 0 * * MON'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          version: latest
+      - name: Install
+        run: pnpm install --dangerously-allow-all-builds
+      - name: Cron
+        run: |
+          git config --global user.email ${{ secrets.GIT_EMAIL }}
+          git config --global user.name ${{ secrets.GIT_USERNAME }}
+          node scripts/postinstall.js --strict
+          npm test
+          git add src/headers-order.json
+          git diff-index --quiet HEAD || git commit -m 'build(update): headers order' --no-verify
+          git push origin HEAD
+          curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/8ddbde82-63f2-420c-8e48-373c0800df74
