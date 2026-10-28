@@ -145,11 +145,13 @@ module.exports = (userAgent, httpsOpts) => {
   const browser = getBrowser(userAgent)
 
   if (browser in knownCiphers) {
-    https.ciphers = knownCiphers[browser]
-    https.signatureAlgorithms = sigalgs[browser]
-    https.ecdhCurve = ecdhCurve[browser]
-    https.minVersion = minVersion[browser]
-    https.maxVersion = maxVersion[browser]
+    https.ciphers ??= knownCiphers[browser]
+    https.signatureAlgorithms ??= sigalgs[browser]
+    https.ecdhCurve ??= ecdhCurve[browser]
+    if (https.secureProtocol == null) {
+      https.minVersion ??= minVersion[browser]
+      https.maxVersion ??= maxVersion[browser]
+    }
   }
 
   return https

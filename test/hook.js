@@ -41,3 +41,15 @@ test('reads a mixed-case user-agent that is not the first header', t => {
 
   t.is(options.https.minVersion, 'TLSv1')
 })
+
+test('keeps a caller ecdhCurve', t => {
+  const options = {
+    https: { ecdhCurve: 'X25519' },
+    headers: { 'user-agent': UA.CHROME }
+  }
+
+  decorate(options)
+
+  t.is(options.https.ecdhCurve, 'X25519')
+  t.is(options.https.minVersion, 'TLSv1')
+})
