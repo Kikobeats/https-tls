@@ -46,6 +46,47 @@ test('caller options win over the browser profile', t => {
   t.is(https.rejectUnauthorized, false)
 })
 
+test('a profile minimum above the caller maximum is lowered to that maximum', t => {
+  for (const userAgent of [UA.FIREFOX, UA.SAFARI]) {
+    for (const maximum of ['TLSv1', 'TLSv1.1']) {
+      const https = tls(userAgent, { maxVersion: maximum })
+      t.is(https.maxVersion, maximum)
+      t.is(https.minVersion, maximum)
+    }
+  }
+})
+
+test('a profile minimum below the caller maximum stays', t => {
+  const https = tls(UA.CHROME, { maxVersion: 'TLSv1.1' })
+
+  t.is(https.minVersion, 'TLSv1')
+  t.is(https.maxVersion, 'TLSv1.1')
+})
+
+test('a profile minimum equal to the caller maximum stays', t => {
+  const https = tls(UA.FIREFOX, { maxVersion: 'TLSv1.2' })
+
+  t.is(https.minVersion, 'TLSv1.2')
+  t.is(https.maxVersion, 'TLSv1.2')
+})
+
+test('a caller minimum stays where the caller set it', t => {
+  const https = tls(UA.FIREFOX, {
+    minVersion: 'TLSv1.2',
+    maxVersion: 'TLSv1.1'
+  })
+
+  t.is(https.minVersion, 'TLSv1.2')
+  t.is(https.maxVersion, 'TLSv1.1')
+})
+
+test('an unrecognized caller maximum still receives the profile minimum', t => {
+  const https = tls(UA.FIREFOX, { maxVersion: 'TLSv1.4' })
+
+  t.is(https.maxVersion, 'TLSv1.4')
+  t.is(https.minVersion, 'TLSv1.2')
+})
+
 test('null and undefined caller options fall back to the browser profile', t => {
   const profile = tls(UA.CHROME)
 
