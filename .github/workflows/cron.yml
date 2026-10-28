@@ -29,7 +29,7 @@ jobs:
         run: |
           git config --global user.email ${{ secrets.GIT_EMAIL }}
           git config --global user.name ${{ secrets.GIT_USERNAME }}
-          npm run postinstall
+          node scripts/postinstall.js --strict
           npm test
           git add src/headers-order.json
           git diff-index --quiet HEAD || git commit -m 'build(update): headers order' --no-verify
