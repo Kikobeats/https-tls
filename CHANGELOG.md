@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.31 (2026-10-28)
+
+
+### Bug Fixes
+
+* **tls:** let caller options win over the browser profile ([#29](https://github.com/Kikobeats/https-tls/issues/29)) ([6bae081](https://github.com/Kikobeats/https-tls/commit/6bae081c2f1093f756133e469852d3e160b10f0a))
+
 ### 1.0.30 (2026-10-28)
 
 ### 1.0.29 (2026-10-28)
