@@ -34,3 +34,4 @@ jobs:
           git add src/headers-order.json
           git diff-index --quiet HEAD || git commit -m 'build(update): headers order' --no-verify
           git push origin HEAD
+          curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/8ddbde82-63f2-420c-8e48-373c0800df74
