@@ -18,17 +18,19 @@ const packedFiles = () => {
   return files.map(file => file.path)
 }
 
-test('installing runs no scripts', t => {
+test('install refreshes header order and falls back to the bundled file', t => {
   const installScripts = INSTALL_LIFECYCLE_SCRIPTS.filter(
     name => name in pkg.scripts
   )
-  t.deepEqual(installScripts, [])
+  t.deepEqual(installScripts, ['postinstall'])
+  t.is(pkg.scripts.postinstall, 'node scripts/postinstall.js')
 })
 
-test('the published package ships the headers order data and no release scripts', t => {
+test('the published package ships the headers order and the install script', t => {
   const files = packedFiles()
   t.true(files.includes('src/headers-order.json'))
-  t.false(files.some(file => file.startsWith('scripts/')))
+  t.true(files.includes('scripts/postinstall.js'))
+  t.true(files.includes('scripts/update-headers-order.js'))
 })
 
 test('release refreshes header order before testing and stages it only after a successful update', t => {
