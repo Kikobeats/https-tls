@@ -31,10 +31,8 @@ const validOrder = {
   edge: ['Host']
 }
 
-const temporaryDirectory = async () => {
-  const directory = await mkdtemp(path.join(os.tmpdir(), 'headers-order-'))
-  return directory
-}
+const temporaryDirectory = () =>
+  mkdtemp(path.join(os.tmpdir(), 'headers-order-'))
 
 const listen = handler =>
   new Promise((resolve, reject) => {
