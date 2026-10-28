@@ -53,3 +53,37 @@ test('keeps a caller ecdhCurve', t => {
   t.is(options.https.ecdhCurve, 'X25519')
   t.is(options.https.minVersion, 'TLSv1')
 })
+
+test('does not decorate when the caller already set a profile field', t => {
+  const cases = [
+    { ciphers: 'TLS_AES_128_GCM_SHA256' },
+    { signatureAlgorithms: 'rsa_pkcs1_sha256' },
+    { minVersion: 'TLSv1.2' },
+    { maxVersion: 'TLSv1.2' }
+  ]
+
+  for (const https of cases) {
+    const options = {
+      https: { ...https },
+      headers: { 'user-agent': UA.CHROME }
+    }
+
+    decorate(options)
+
+    t.deepEqual(options.https, https)
+  }
+})
+
+test('a caller secureProtocol keeps the profile without versions', t => {
+  const options = {
+    https: { secureProtocol: 'TLSv1_2_method' },
+    headers: { 'user-agent': UA.CHROME }
+  }
+
+  decorate(options)
+
+  t.is(options.https.secureProtocol, 'TLSv1_2_method')
+  t.true(options.https.ciphers.startsWith('TLS_AES_128_GCM_SHA256'))
+  t.false('minVersion' in options.https)
+  t.false('maxVersion' in options.https)
+})
