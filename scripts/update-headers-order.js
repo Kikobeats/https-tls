@@ -1,6 +1,6 @@
 'use strict'
 
-const { writeFile, rename, rm } = require('fs/promises')
+const fs = require('fs/promises')
 const path = require('path')
 
 const SOURCE_URL =
@@ -28,25 +28,30 @@ const assertHeadersOrder = headersOrder => {
   return headersOrder
 }
 
-const writeAtomically = async (destination, content) => {
+const writeAtomically = async (destination, content, io = fs) => {
   const temporary = `${destination}.${process.pid}.tmp`
   try {
-    await writeFile(temporary, content)
-    await rename(temporary, destination)
+    await io.writeFile(temporary, content)
+    await io.rename(temporary, destination)
   } catch (error) {
-    await rm(temporary, { force: true })
+    // A cleanup failure must not replace the write or rename error.
+    await io.rm(temporary, { force: true }).catch(() => {})
     throw error
   }
 }
 
-const main = async () => {
-  const response = await fetch(SOURCE_URL)
-  if (!response.ok) throw new Error(`HTTP ${response.status} for ${SOURCE_URL}`)
+const main = async ({ destination = DESTINATION, url = SOURCE_URL } = {}) => {
+  const response = await fetch(url)
+  if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`)
   const headersOrder = assertHeadersOrder(await response.json())
-  await writeAtomically(DESTINATION, JSON.stringify(headersOrder, null, 2))
+  await writeAtomically(destination, JSON.stringify(headersOrder, null, 2))
 }
 
-main().catch(error => {
-  console.error(error)
-  process.exitCode = 1
-})
+if (require.main === module) {
+  main().catch(error => {
+    console.error(error)
+    process.exitCode = 1
+  })
+}
+
+module.exports = { assertHeadersOrder, main, writeAtomically }
