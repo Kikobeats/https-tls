@@ -140,16 +140,28 @@ const maxVersion = {
   safari: 'TLSv1.3'
 }
 
+const versionOrder = ['TLSv1', 'TLSv1.1', 'TLSv1.2', 'TLSv1.3']
+
+const minimumWithin = (minimum, maximum) => {
+  const minRank = versionOrder.indexOf(minimum)
+  const maxRank = versionOrder.indexOf(maximum)
+  if (maxRank === -1 || minRank <= maxRank) return minimum
+  return maximum
+}
+
 module.exports = (userAgent, httpsOpts) => {
   const https = Object.assign({}, httpsOpts)
   const browser = getBrowser(userAgent)
 
   if (browser in knownCiphers) {
-    https.ciphers = knownCiphers[browser]
-    https.signatureAlgorithms = sigalgs[browser]
-    https.ecdhCurve = ecdhCurve[browser]
-    https.minVersion = minVersion[browser]
-    https.maxVersion = maxVersion[browser]
+    https.ciphers ??= knownCiphers[browser]
+    https.signatureAlgorithms ??= sigalgs[browser]
+    https.ecdhCurve ??= ecdhCurve[browser]
+    if (https.secureProtocol == null) {
+      const effectiveMax = https.maxVersion ?? maxVersion[browser]
+      https.minVersion ??= minimumWithin(minVersion[browser], effectiveMax)
+      https.maxVersion ??= maxVersion[browser]
+    }
   }
 
   return https
