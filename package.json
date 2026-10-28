@@ -51,7 +51,6 @@
   "files": [
     "hook.js",
     "index.js",
-    "scripts",
     "src"
   ],
   "scripts": {
@@ -60,14 +59,14 @@
     "contributors": "(npx git-authors-cli && npx finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard-markdown README.md && standard",
-    "postinstall": "node scripts/postinstall.js",
     "postrelease": "npm run release:tags && npm run release:github && (ci-publish || npm publish --access=public)",
-    "prerelease": "npm run contributors",
+    "prerelease": "npm run contributors && npm run update:headers-order && npm test",
     "pretest": "npm run lint",
     "release": "standard-version -a",
     "release:github": "github-generate-release",
     "release:tags": "git push --follow-tags origin HEAD:master",
-    "test": "c8 ava"
+    "test": "c8 ava",
+    "update:headers-order": "node scripts/update-headers-order.js && git add src/headers-order.json"
   },
   "license": "MIT",
   "ava": {
