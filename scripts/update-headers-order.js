@@ -1,6 +1,6 @@
 'use strict'
 
-const { writeFile } = require('fs/promises')
+const { writeFile, rename, rm } = require('fs/promises')
 const path = require('path')
 
 const SOURCE_URL =
@@ -16,7 +16,10 @@ const isHeaderList = value =>
   value.every(header => typeof header === 'string')
 
 const assertHeadersOrder = headersOrder => {
-  const invalid = REQUIRED_BROWSERS.filter(
+  const browsers = [
+    ...new Set([...REQUIRED_BROWSERS, ...Object.keys(headersOrder ?? {})])
+  ]
+  const invalid = browsers.filter(
     browser => !isHeaderList(headersOrder?.[browser])
   )
   if (invalid.length > 0) {
@@ -25,11 +28,22 @@ const assertHeadersOrder = headersOrder => {
   return headersOrder
 }
 
+const writeAtomically = async (destination, content) => {
+  const temporary = `${destination}.${process.pid}.tmp`
+  try {
+    await writeFile(temporary, content)
+    await rename(temporary, destination)
+  } catch (error) {
+    await rm(temporary, { force: true })
+    throw error
+  }
+}
+
 const main = async () => {
   const response = await fetch(SOURCE_URL)
   if (!response.ok) throw new Error(`HTTP ${response.status} for ${SOURCE_URL}`)
   const headersOrder = assertHeadersOrder(await response.json())
-  await writeFile(DESTINATION, JSON.stringify(headersOrder, null, 2))
+  await writeAtomically(DESTINATION, JSON.stringify(headersOrder, null, 2))
 }
 
 main().catch(error => {
